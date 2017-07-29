@@ -1,0 +1,24 @@
+<div class="container">
+	<!--Main Features-->
+	<div class="row">
+		<div class="col-md-12 col-xs-12">
+			<div [ngSwitch]="getCurrentStep()">
+				<div *ngSwitchCase="0">
+					<h4>SMS test application</h4>
+					<div class="form-group">
+						<div  class="row"><div class="col-md-5">
+						<label for="username">Username: </label></div>
+						<div class="col-md-7">
+						<input type="text" class="form-control" id="username" [tooltip]="'Please enter a username:'" placeholder="Username" [(ngModel)]="username"></div></div>
+					</div>
+					
+					<button type="submit" class="btn btn-success" (click)="sendSMS()">Send SMS</button>
+				</div>
+				<div *ngSwitchCase="1">
+					<h4>SMS test application - Results</h4>
+				</div>
+				
+			</div>
+		</div>
+	</div>
+</div>
