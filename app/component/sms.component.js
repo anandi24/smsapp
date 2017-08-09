@@ -14,19 +14,63 @@ var SMSComponent = (function () {
     function SMSComponent(httpService) {
         this.httpService = httpService;
         this.step = 0;
-        this.username = '';
+        this.user = '';
+        this.passwd = '';
+        this.message = '';
+        this.mobilenumber = '';
+        this.searchResults = '';
+        this.sms = new SMS();
+        this.report = new Report();
     }
     SMSComponent.prototype.sendSMS = function () {
-        console.log(this.username);
+        var _this = this;
+        this.step += 1;
+        this.searchResults = '';
+        var validateBody = JSON.stringify(this.sms);
+        this.httpService.sendSMS(validateBody, "sendSMS").subscribe(function (resp) {
+            if (resp != null) {
+                _this.searchResults = resp.messageResponse;
+            }
+            console.log(_this.searchResults);
+        }, function (error) {
+            console.log(error);
+        });
+    };
+    SMSComponent.prototype.multiSMS = function () {
+        var _this = this;
+        this.step += 1;
+        this.searchResults = '';
+        var validateBody = JSON.stringify(this.sms);
+        this.httpService.sendSMS(validateBody, "multiSMS").subscribe(function (resp) {
+            if (resp != null) {
+                _this.searchResults = resp.messageResponse;
+            }
+            console.log(_this.searchResults);
+        }, function (error) {
+            console.log(error);
+        });
+    };
+    SMSComponent.prototype.generateReport = function () {
+        var _this = this;
+        this.searchResults = '';
+        var validateBody = JSON.stringify(this.report);
+        this.httpService.report(validateBody, "report").subscribe(function (resp) {
+            if (resp != null) {
+                _this.searchResults = resp.response;
+            }
+            console.log(_this.searchResults);
+        }, function (error) {
+            console.log(error);
+        });
     };
     SMSComponent.prototype.getCurrentStep = function () {
         return this.step;
     };
-    SMSComponent.prototype.back = function () {
-        this.step = 1;
+    SMSComponent.prototype.goback = function () {
+        this.step = this.step - 1;
     };
-    SMSComponent.prototype.getSecondPage = function () {
-        this.step += 1;
+    SMSComponent.prototype.toReport = function () {
+        this.step = this.step + 1;
     };
     SMSComponent = __decorate([
         core_1.Component({
@@ -39,4 +83,14 @@ var SMSComponent = (function () {
     return SMSComponent;
 }());
 exports.SMSComponent = SMSComponent;
+var SMS = (function () {
+    function SMS() {
+    }
+    return SMS;
+}());
+var Report = (function () {
+    function Report() {
+    }
+    return Report;
+}());
 //# sourceMappingURL=sms.component.js.map

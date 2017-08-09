@@ -9,26 +9,18 @@ export class HttpService {
 
     constructor( private http: Http ) { }
 
-    searchResults( params: any, action: string ) {
+    sendSMS( params: any, action: string ) {
         let headers = new Headers( { 'Content-Type': 'application/json' });
         let options = new RequestOptions( { headers: headers });
         console.log(params);
-        return this.http.post( "http://localhost:8080/" + action, params, options ).map( res => res.json() );
+        return this.http.post( "http://127.0.0.1:4500/" + action, params, options ).map( res => res.json() );
     }
 
-    findHotels( params: any) {
+    report( params: any, action: string ) {
         let headers = new Headers( { 'Content-Type': 'application/json' });
         let options = new RequestOptions( { headers: headers });
         console.log(params);
-        return this.http.get("http://localhost:8080/" + params).map( res => res.json() );
+        return this.http.post( "http://127.0.0.1:4500/" + action, params, options ).map( res => res.json() );
     }
-
-    confirmBooking( params: any, action: string ){
-         let headers = new Headers( { 'Content-Type': 'application/json' });
-        let options = new RequestOptions( { headers: headers });
-        console.log(params);
-        return this.http.post( "http://localhost:8080" + action, params, options ).map( res => res.json() );
-    }
-
-    
+   
 }

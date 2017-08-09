@@ -9,15 +9,61 @@
 						<div  class="row"><div class="col-md-5">
 						<label for="username">Username: </label></div>
 						<div class="col-md-7">
-						<input type="text" class="form-control" id="username" [tooltip]="'Please enter a username:'" placeholder="Username" [(ngModel)]="username"></div></div>
+						<input type="text" class="form-control" id="user" [tooltip]="'Please enter a username:'" placeholder="Username" [(ngModel)]="sms.user"></div></div>
+						<div class="paddingTwenty"></div>
+
+						<div  class="row"><div class="col-md-5">
+						<label for="username">Message: </label></div>
+						<div class="col-md-7">
+						<input type="text" class="form-control" id="message" [(ngModel)]="sms.message"></div></div>
+						<div class="paddingTwenty"></div>
+
+						<div  class="row"><div class="col-md-5">
+						<label for="mobileNo">Mobile Number: </label></div>
+						<div class="col-md-7">
+						<input type="text" class="form-control" id="mobilenumber" [(ngModel)]="sms.mobilenumber"></div></div>
+						<div class="paddingTwenty"></div>
+
 					</div>
 					
 					<button type="submit" class="btn btn-success" (click)="sendSMS()">Send SMS</button>
+					<button type="submit" class="btn btn-success" (click)="multiSMS()">Multi SMS</button>
 				</div>
 				<div *ngSwitchCase="1">
 					<h4>SMS test application - Results</h4>
+					<div  class="row"><div class="col-md-12">
+					<label for="responseMessage">{{searchResults}} </label></div></div>
+					<div class="paddingTwenty"></div>
+					<button type="submit" class="btn btn-success" (click)="goback()">Back</button>
+					<button type="submit" class="btn btn-success" (click)="toReport()">To Report</button>
+					
 				</div>
 				
+				<div *ngSwitchCase="2">
+					<h4>SMS Report generation</h4>
+					<div class="form-group">
+						<div  class="row"><div class="col-md-5">
+						<label for="username">Username: </label></div>
+						<div class="col-md-7">
+						<input type="text" class="form-control" id="user" [tooltip]="'Please enter a username:'" placeholder="Username" [(ngModel)]="report.user"></div></div>
+						<div class="paddingTwenty"></div>
+
+						<div  class="row"><div class="col-md-5">
+						<label for="fromdate">From Date: </label></div>
+						<div class="col-md-7">
+						<input type="date" class="form-control" id="fromdate" [(ngModel)]="report.fromdate"></div></div>
+						<div class="paddingTwenty"></div>
+
+						<div  class="row"><div class="col-md-5">
+						<label for="todate">To Date: </label></div>
+						<div class="col-md-7">
+						<input type="text" class="form-control" id="todate" [(ngModel)]="report.todate"></div></div>
+						<div class="paddingTwenty"></div>
+
+					</div>
+					<button type="submit" class="btn btn-success" (click)="goback()">Back</button>
+					<button type="submit" class="btn btn-success" (click)="generateReport()">Report</button>
+				</div>
 			</div>
 		</div>
 	</div>

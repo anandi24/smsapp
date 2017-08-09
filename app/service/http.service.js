@@ -16,23 +16,17 @@ var HttpService = (function () {
     function HttpService(http) {
         this.http = http;
     }
-    HttpService.prototype.searchResults = function (params, action) {
+    HttpService.prototype.sendSMS = function (params, action) {
         var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
         var options = new http_1.RequestOptions({ headers: headers });
         console.log(params);
-        return this.http.post("http://localhost:8080/" + action, params, options).map(function (res) { return res.json(); });
+        return this.http.post("http://127.0.0.1:4500/" + action, params, options).map(function (res) { return res.json(); });
     };
-    HttpService.prototype.findHotels = function (params) {
+    HttpService.prototype.report = function (params, action) {
         var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
         var options = new http_1.RequestOptions({ headers: headers });
         console.log(params);
-        return this.http.get("http://localhost:8080/" + params).map(function (res) { return res.json(); });
-    };
-    HttpService.prototype.confirmBooking = function (params, action) {
-        var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
-        var options = new http_1.RequestOptions({ headers: headers });
-        console.log(params);
-        return this.http.post("http://localhost:8080" + action, params, options).map(function (res) { return res.json(); });
+        return this.http.post("http://127.0.0.1:4500/" + action, params, options).map(function (res) { return res.json(); });
     };
     HttpService = __decorate([
         core_1.Injectable(), 

@@ -16,23 +16,89 @@ export class SMSComponent {
 
 
 	step = 0;
-	username = '';
+	user = '';
+    passwd = '';
+    message = '';
+    mobilenumber = '';
+    searchResults = '';
+    sms = new SMS();
+    report = new Report();
 
     sendSMS(){
-        console.log(this.username);
+        this.step += 1;
+        this.searchResults = '';
+        let validateBody = JSON.stringify(this.sms);
+
+         this.httpService.sendSMS(validateBody, "sendSMS").subscribe(
+            resp => {    
+                if(resp!=null){
+                this.searchResults=resp.messageResponse;
+                }
+                console.log(this.searchResults);
+            },
+            error => {
+                console.log(error);
+            }
+            );   
+
+    }
+
+    multiSMS(){
+        this.step += 1;
+        this.searchResults = '';
+        let validateBody = JSON.stringify(this.sms);
+
+         this.httpService.sendSMS(validateBody, "multiSMS").subscribe(
+            resp => {    
+                if(resp!=null){
+                this.searchResults=resp.messageResponse;
+                }
+                console.log(this.searchResults);
+            },
+            error => {
+                console.log(error);
+            }
+            );   
+
+    }
+
+    generateReport(){
+        this.searchResults = '';
+        let validateBody = JSON.stringify(this.report);
+
+         this.httpService.report(validateBody, "report").subscribe(
+            resp => {    
+                if(resp!=null){
+                this.searchResults=resp.response;
+                }
+                console.log(this.searchResults);
+            },
+            error => {
+                console.log(error);
+            }
+            );   
     }
 
 	getCurrentStep() {
         return this.step;
     }
 
-    back(){
-        this.step =1;    }
+    goback(){
+        this.step = this.step - 1;    }
 
-    getSecondPage() {
-    	this.step += 1;
-    }
+    toReport(){
+        this.step = this.step + 1;    }
+}
 
-    
+class SMS{
+    user: string;
+    mobilenumber: number;
+    message: string;
+}
+
+class Report{
+    user:string;
+    fromdate: string;
+    todate: string;
 }
 
